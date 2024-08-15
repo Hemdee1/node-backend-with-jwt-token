@@ -3,9 +3,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const createSession = (res, id) => {
+const createSession = (res, userId) => {
   // to create the token, jwt takes 3 arguments, 1- payload, 2- secret, 3- optional settings
-  const payload = { id: id };
+  const payload = { id: userId };
   const SECRET = process.env.SECRET;
 
   const token = jwt.sign(payload, SECRET, {

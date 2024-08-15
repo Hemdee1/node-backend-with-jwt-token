@@ -14,6 +14,18 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    authorFirstName: {
+      type: String,
+      required: true,
+    },
+    authorLastName: {
+      type: String,
+      required: true,
+    },
+    authorId: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

@@ -14,13 +14,18 @@ const {
   getAllBlogs,
   updateBlog,
 } = require("../controller/blogController");
+const checkAuthenticatedUser = require("../middleware/checkAuthenticatedUser");
 
 const blogRoutes = express.Router();
 
-blogRoutes.post("/", createBlog);
+blogRoutes.post("/", checkAuthenticatedUser, createBlog);
+blogRoutes.put("/update/:id", checkAuthenticatedUser, updateBlog);
+blogRoutes.delete("/delete/:id", checkAuthenticatedUser, deleteBlog);
 blogRoutes.get("/", getAllBlogs);
 blogRoutes.get("/:id", getBlog);
-blogRoutes.put("/update/:id", updateBlog);
-blogRoutes.delete("/delete/:id", deleteBlog);
 
 module.exports = blogRoutes;
+
+//  AUTHORIZATION
+// To allow access to some specific part of the backend based on some criteria.
+// 1- To allow only logged in user to have access to update and delete blog

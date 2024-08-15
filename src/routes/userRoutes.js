@@ -8,6 +8,7 @@ const {
   getAllUsers,
   autoLogin,
 } = require("../controller/userController");
+const checkAuthenticatedUser = require("../middleware/checkAuthenticatedUser");
 
 const userRoutes = express.Router();
 
@@ -19,9 +20,9 @@ const userRoutes = express.Router();
 
 userRoutes.post("/signup", Signup);
 userRoutes.post("/login", Login);
-userRoutes.put("/change-password/:id", ChangePassword);
-userRoutes.post("/logout", Logout);
-userRoutes.put("/update/:id", UpdateProfile);
+userRoutes.put("/change-password/:id", checkAuthenticatedUser, ChangePassword);
+userRoutes.post("/logout", checkAuthenticatedUser, Logout);
+userRoutes.put("/update/:id", checkAuthenticatedUser, UpdateProfile);
 
 userRoutes.get("/autologin", autoLogin);
 
